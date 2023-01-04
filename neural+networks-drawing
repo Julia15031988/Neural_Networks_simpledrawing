@@ -1,3 +1,5 @@
+#1
+
 import cv2
 import numpy as np
 
@@ -13,4 +15,32 @@ cv2.circle(photo, (photo.shape[1]//2, photo.shape[0]//2) , 100 , (119,201,105), 
 cv2.putText(photo, "JULIAAAAA", (100,150), cv2.FONT_HERSHEY_TRIPLEX, 2, (255,0,0), 1)
 
 cv2.imshow("photo", photo)
+cv2.waitKey(0)
+
+
+
+#2
+import cv2
+import numpy as np
+
+img=cv2.imread("images/ccc.jpg")
+
+#img=cv2.flip(img,-1)
+def rotate(img_param, angle):
+    height, width = img_param.shape [:2]
+    point = (width//2, height//2)
+
+    mat=cv2.getRotationMatrix2D(point, angle, 1)
+    return cv2.warpAffine(img_param, mat, (width, height))
+
+
+#img=rotate(img,-90)
+
+def tranform(img_param, x,y):
+    mat=np.float32([[1,0,x],  [0,1,y]])
+    return cv2.warpAffine(img_param, mat, (img_param.shape[1], img_param.shape[0]))
+
+img=tranform(img,30,200)
+cv2.imshow("Result", img)
+
 cv2.waitKey(0)
